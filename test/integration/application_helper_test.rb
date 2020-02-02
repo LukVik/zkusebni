@@ -11,12 +11,4 @@ class ApplicationHelperTest < ActionDispatch::IntegrationTest
     assert_equal full_title(page_title), "#{page_title} | #{base_title}"
     end
   end
-
-  # test 'full title helper test' do
-  #   base_title = 'Ruby on Rails Tutorial Sample App'
-  #   assert_equal full_title, base_title
-  #   page_title = %w[Home About Help Contact]
-  #   assert_equal full_title(page_title), "#{page_title} | #{base_title}"
-  # end
-
 end
