@@ -1,0 +1,7 @@
+/*
+BE CAREFUL - do not use a name index for the SCSS, etc. - files index.something is otherwise used by Rails as manifest
+*= require_tree .
+*= require_self
+*/
+
+@import "custom";
