@@ -19,6 +19,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select 'footer' do
       assert_select 'li a[href=?]', about_path
       assert_select 'li a[href=?]', contact_path
+      assert_select 'li a[href=?]', 'http://news.railstutorial.org/', text: "News"
     end
     get contact_path
     assert_select 'title', full_title('Contact')
