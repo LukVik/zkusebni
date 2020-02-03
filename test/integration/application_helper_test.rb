@@ -8,7 +8,7 @@ class ApplicationHelperTest < ActionDispatch::IntegrationTest
     assert_equal full_title, base_title
     page_title = %w[Home About Help Contact]
     page_title.each do |page_title|
-    assert_equal full_title(page_title), "#{page_title} | #{base_title}"
+      assert_equal full_title(page_title), "#{page_title} | #{base_title}"
     end
   end
 end
