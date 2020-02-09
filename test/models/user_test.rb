@@ -93,7 +93,7 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid? # isn’t valid
   end
 
-  test 'password is too short, email and name is valid' do
+  test 'password is too short, email and name are valid' do
     @user.email = 'bb@example.com'
     @user.name = 'Medison BB'
     @user.password =  @user.password_confirmation = 'a'
