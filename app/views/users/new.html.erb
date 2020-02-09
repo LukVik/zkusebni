@@ -1,3 +1,17 @@
 <% provide(:title, 'Sign up') %>
 <h1>Sign up</h1>
 <p>This will be a signup page for new users.</p>
+
+<div class="row">
+  <%= form_for(@user) do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+    <%= f.label :pssword %>
+    <%= f.password_field :pssword %>
+    <%= f.label :password_confirmation, "Confirmation" %>
+    <%= f.password_field :password_confirmation %>
+    <%= f.submit "Create my acccount", class: "btn btn-primary" %>
+  <% end %>
+</div>
