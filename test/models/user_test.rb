@@ -103,4 +103,10 @@ class UserTest < ActiveSupport::TestCase
   test 'password is equal password confirm' do
     assert_equal @user.password, @user.password_confirmation
   end
+
+  test "name of user can be updated" do
+    @user.update_attribute(:name, 'Medison Ivy')
+    @user.reload.name
+    assert_equal @user.name, 'Medison Ivy'
+  end
 end
