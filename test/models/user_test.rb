@@ -5,7 +5,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   # is important initiate variables and data with setup for DRY
   def setup
-    @user = User.new(name: 'Medison BB', email: 'bb@example.com')
+    @user = User.new(name: 'Medison BB', email: 'bb@example.com', password: "foobar", password_confirmation: "foobar")
   end
 
   test 'test for valid object' do
@@ -68,18 +68,39 @@ class UserTest < ActiveSupport::TestCase
     # assertion user capitalized email
     # Testing case-insensitive email uniqueness
     duplicate_user.email = @user.email.upcase
-    @user.save
+    @user.save  # save to database
     assert_not duplicate_user.valid?
   end
 
-  # Active Record uniqueness validation does not guarantee uniqueness at the database level
+  # Active Record uniqueness validation does not guarantee uniqueness
+  # at the database level have to add index to email columns
+
   test "email addresses should be saved as lower-case" do
     # insert usecase to variable
-    mixed_case_email = "Foo@ExAMPle.CoM"
+    mixed_case_email = "Bb@exaMple.Com"
     @user.email = mixed_case_email
-    @user.save
-    assert_equal mixed_case_email.downcase, @user.reload.email
+    @user.save # save to database
+    assert_equal mixed_case_email.downcase, @user.reload.email # is equal
   end
 
+  test "password should not be empty" do
+    @user.password = @user.password_confirmation = '      ' * 6 # not valid
+    assert_not @user.valid? # isn’t valid
+  end
 
+  test "password should have MIN 6 chars" do
+    @user.password = @user.password_confirmation = 'a' * 5 # not valid
+    assert_not @user.valid? # isn’t valid
+  end
+
+  test 'password is too short, email and name is valid' do
+    @user.email = 'bb@example.com'
+    @user.name = 'Medison BB'
+    @user.password =  @user.password_confirmation = 'a'
+    assert_not @user.valid?
+  end
+
+  test 'password is equal password confirm' do
+    assert_equal @user.password, @user.password_confirmation
+  end
 end
