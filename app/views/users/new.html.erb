@@ -5,7 +5,7 @@
 <div class="row">
   <%= form_for(@user) do |f| %>
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, placeholder: " Fill your name" %>
     <%= f.label :email %>
     <%= f.text_field :email %>
     <%= f.label :password %>
