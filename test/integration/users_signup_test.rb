@@ -25,4 +25,16 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     user.valid?
     assert user.errors.messages.values_at(:name, :email, :password_confirmation, :password)
   end
+
+  test 'successful signup create new user' do
+    get signup_path
+    assert_difference 'User.count', 1 do
+      post users_path, params: { user: { name:  "Example User",
+                                         email: "user@example.com",
+                                         password:              "123456",
+                                         password_confirmation: "123456" } }
+    end
+    assert_redirected_to user_path(User.last.id)
+    assert_equal "Welcome to the Sample App!", flash[:success]
+  end
 end
