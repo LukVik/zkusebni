@@ -24,6 +24,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     user = User.new(name: '', email: '', password: '', password_confirmation: '')
     user.valid?
     assert user.errors.messages.values_at(:name, :email, :password_confirmation, :password)
+    # assert_select 'div#error_explanation li', text: "attribute: name, message: "
   end
 
   test 'successful signup create new user' do
@@ -31,10 +32,11 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_difference 'User.count', 1 do
       post users_path, params: { user: { name:  "Example User",
                                          email: "user@example.com",
-                                         password:              "123456",
-                                         password_confirmation: "123456" } }
+                                         password:              "password",
+                                         password_confirmation: "password" } }
     end
     assert_redirected_to user_path(User.last.id)
     assert_equal "Welcome to the Sample App!", flash[:success]
+    assert is_logged_in?
   end
 end
