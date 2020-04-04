@@ -38,7 +38,7 @@ class UserTest < ActiveSupport::TestCase
     @user.email = 'a' * 244 + '@example.com'
     assert_not @user.valid?
   end
-# 6.2.4Format validation
+# 6.2.4 Format validation
   test "email validation should accept valid addresses" do
     # array definition
     valid_addresses = %w[bb@example.com USER@foo.COM A_US-ER@foo.bar.org
