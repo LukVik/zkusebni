@@ -26,7 +26,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     follow_redirect!
   end
 
-  test 'successful login, check proper user menu links, followed by logout' do
+  test 'successful login, check proper user menu links, followed by login/logout' do
     post login_path, params: { session: { email: @user.email,
                                           password: 'password' } }
     assert is_logged_in?
