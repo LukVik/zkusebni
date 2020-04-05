@@ -18,4 +18,18 @@ class ActiveSupport::TestCase
     session.delete(:user_id)
     @current_user = nil
   end
+
+  # Log in as a particular user.
+  def log_in_as(user)
+    session[:user_id] = user.id
+  end
+end
+
+class ActionDispatch::IntegrationTest
+
+  # Log in as a particular user.
+  def log_in_as(user, password: 'password')
+    post login_path, params: { session: { email: user.email,
+                                          password: password } }
+  end
 end
